@@ -1,0 +1,5 @@
+    NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+          You can watch its status by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "ioq3-dedicated.fullname" . }}'
+Top get the IP of the LoadBalancer, simply run:
+kubectl get svc --namespace {{ .Release.Namespace }} {{ include "ioq3-dedicated.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}"
+By default, it is exposed on: {{ .Values.service.port }}
